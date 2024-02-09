@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { FaXTwitter, FaApple } from "react-icons/fa6";
 import { Button } from "@/components/ui/button";
@@ -6,10 +6,15 @@ import { FcGoogle } from "react-icons/fc";
 import { IoMdClose } from "react-icons/io";
 
 export const Login: React.FC = () => {
+	const [showFirstScreen, setShowFirstScreen] = useState<boolean>(true);
+
+	const toggleScreen = (): void => {
+		setShowFirstScreen(!showFirstScreen);
+	};
 	return (
 		<>
 			<div
-				className="min-h-screen"
+				className={showFirstScreen ? "min-h-screen" : "hidden"}
 				style={{ backgroundColor: "rgba(36, 45, 52, 255)" }}
 			>
 				<div className="max-w-xl mx-auto pt-40">
@@ -18,7 +23,7 @@ export const Login: React.FC = () => {
 							<CardTitle className="mx-auto w-full -mt-2">
 								<div className="grid grid-cols-2">
 									<div>
-										<button>
+										<button onClick={toggleScreen}>
 											<IoMdClose className="text-white text-left" />
 										</button>
 									</div>
@@ -83,13 +88,77 @@ export const Login: React.FC = () => {
 				</div>
 			</div>
 
-			<div className="min-h-screen bg-black">
-				<div className="grid grid-cols-2">
-					<div className="mx-auto min-h-screen justify-center items-center flex">
-						<FaXTwitter className="text-white h-96 w-96 col-span-2" />
+			<div
+				className={!showFirstScreen ? "min-h-screen" : "hidden"}
+				style={{ backgroundColor: "black" }}
+			>
+				<div className="grid md:grid-cols-2 grid-cols-1">
+					<div className="mx-auto md:min-h-screen md:justify-center md:items-center md:flex block">
+						<FaXTwitter className="text-white md:h-96 md:w-96 h-14 w-14 md:col-span-2" />
 					</div>
-					<div className="max-w-2xl px-32 py-60">
-						<FaXTwitter className="text-white h-8 w-8 col-span-2" />
+					<div className="max-w-4xl md:px-32 md:py-48 px-14 py-20">
+						<h1 className="scroll-m-20 text-white font-extrabold tracking-normal text-7xl">
+							Happening now
+						</h1>
+						<h3 className="scroll-m-20 mt-20  text-white text-4xl font-extrabold tracking-wide">
+							Join today.
+						</h3>
+						<div className="max-w-xs text-sm">
+							<Button variant="outline" className="my-5 w-full rounded-full">
+								<FcGoogle className="h-6 w-6 me-2" />
+								Sign in with Google
+							</Button>
+							<br />
+							<Button variant="outline" className="w-full rounded-full">
+								<FaApple className="h-6 w-6 me-2" />
+								Sign in with Apple
+							</Button>
+							<hr className="h-px my-5 bg-gray-700 border-0 dark:bg-gray-700" />
+							<Button
+								variant="outline"
+								className="w-full rounded-full font-bold border-none text-md tracking-wide text-white bg-sky-500 mb-5"
+							>
+								Create account
+							</Button>
+							<div className="text-gray-500 w-300px">
+								By signing up, you agree to the{" "}
+								<a
+									href="https://twitter.com/tos"
+									rel="noopener noreferrer nofollow"
+									target="_blank"
+									className="text-blue-500"
+								>
+									<span>Terms of Service</span>
+								</a>{" "}
+								and{" "}
+								<a
+									href="https://twitter.com/privacy"
+									rel="noopener noreferrer nofollow"
+									target="_blank"
+									className="text-blue-500"
+								>
+									<span>Privacy Policy</span>
+								</a>
+								, including{" "}
+								<a
+									href="https://help.twitter.com/rules-and-policies/twitter-cookies"
+									rel="noopener noreferrer nofollow"
+									target="_blank"
+									className="text-blue-500"
+								>
+									<span>Cookie Use.</span>
+								</a>
+							</div>
+							<p className="leading-7 [&:not(:first-child)]:mt-6 text-white text-lg font-bold mb-5">
+								Already have an account?
+							</p>
+							<Button
+								variant="outline"
+								className="w-full rounded-full font-bold text-md tracking-wide text-sky-500 bg-black"
+							>
+								Sign in
+							</Button>
+						</div>
 					</div>
 				</div>
 			</div>
